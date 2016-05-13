@@ -94,7 +94,7 @@ if [[ -n "$SSH_KEY" ]]; then
 fi
 
 ## Copy default npmrc file
-echo $NPM_AUTH | base64 -d > "$build_root/.npmrc"
+cp /tmp/builder/.npmrc "$build_root"
 
 ## Buildpack detection
 
