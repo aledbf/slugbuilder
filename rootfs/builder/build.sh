@@ -93,6 +93,9 @@ if [[ -n "$SSH_KEY" ]]; then
     chmod 600 ~/.ssh/config
 fi
 
+## Copy default npmrc file
+echo $NPM_AUTH | base64 -d > "$build_root/.npmrc"
+
 ## Buildpack detection
 
 buildpacks=($buildpack_root/*)
@@ -140,9 +143,6 @@ else
     echo_title "Unable to select a buildpack"
     exit 1
 fi
-
-## Copy default npmrc file
-echo $NPM_AUTH > "$build_root/.npmrc"
 
 ## Buildpack compile
 

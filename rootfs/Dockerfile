@@ -1,4 +1,4 @@
-FROM heroku/cedar:14
+FROM registry.soficom.cl/soficom/cedarish:git-89eb174
 
 RUN mkdir /app
 RUN addgroup --quiet --gid 2000 slug && \
@@ -12,10 +12,15 @@ RUN chown slug:slug /bin/get_object
 RUN chown slug:slug /bin/put_object
 RUN chown slug:slug /bin/objstorage
 
+RUN mkdir -p /tmp/build && chmod 777 -R /tmp/build
+
 USER slug
 ENV HOME /app
 ADD ./builder/ /tmp/builder
 RUN /tmp/builder/install-buildpacks
+
+COPY libxl-lin-3.6.5.tar.gz /tmp/libxl-lin-3.6.5.tar.gz
+ENV NODE_LIBXL_SDK_ARCHIVE /tmp/libxl-lin-3.6.5.tar.gz
 
 ENTRYPOINT ["/tmp/builder/build.sh"]
 
