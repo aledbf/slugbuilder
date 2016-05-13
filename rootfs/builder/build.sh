@@ -189,6 +189,6 @@ if [[ "$slug_file" != "-" ]]; then
     echo_title "Compiled slug size is $slug_size"
 
     if [[ $PUT_PATH ]]; then
-			put_object
-		fi
+		/bin/put_object
+	fi
 fi

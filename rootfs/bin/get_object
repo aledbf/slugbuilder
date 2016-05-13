@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+set -eo pipefail
+
+[[ $DEBUG ]] && set -x
+
 GET_PATH=/tmp/slug.tgz
 
 export BUCKET_FILE=/var/run/secrets/deis/objectstore/creds/builder-bucket
