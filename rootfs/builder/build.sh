@@ -141,6 +141,9 @@ else
     exit 1
 fi
 
+## Copy default npmrc file
+echo $NPM_AUTH > "$build_root/.npmrc"
+
 ## Buildpack compile
 
 "$selected_buildpack/bin/compile" "$build_root" "$cache_root" | ensure_indent
