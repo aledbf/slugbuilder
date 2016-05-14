@@ -171,9 +171,9 @@ chown -R slug:slug $build_root/*
 ## Produce slug
 
 if [[ -f "$build_root/.slugignore" ]]; then
-    tar -z --exclude='.git' -X "$build_root/.slugignore" -C $build_root -cf $slug_file . | cat
+    tar -z --exclude='.git' --exclude='.heroku' --exclude='.npmrc' -X "$build_root/.slugignore" -C $build_root -cf $slug_file . | cat
 else
-    tar -z --exclude='.git' -C $build_root -cf $slug_file . | cat
+    tar -z --exclude='.git' --exclude='.heroku' --exclude='.npmrc' -C $build_root -cf $slug_file . | cat
 fi
 
 if [[ ! -f "$build_root/Procfile" ]]; then
