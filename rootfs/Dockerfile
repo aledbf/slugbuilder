@@ -14,13 +14,15 @@ RUN chown slug:slug /bin/objstorage
 
 RUN mkdir -p /tmp/build && chmod 777 -R /tmp/build
 
+COPY libxl-lin-3.6.5.tar.gz /tmp/libxl-lin-3.6.5.tar.gz
+ENV NODE_LIBXL_SDK_ARCHIVE /tmp/libxl-lin-3.6.5.tar.gz
+
+RUN chmod 755 /tmp/libxl-lin-3.6.5.tar.gz
+
 USER slug
 ENV HOME /app
 ADD ./builder/ /tmp/builder
 RUN /tmp/builder/install-buildpacks
-
-COPY libxl-lin-3.6.5.tar.gz /tmp/libxl-lin-3.6.5.tar.gz
-ENV NODE_LIBXL_SDK_ARCHIVE /tmp/libxl-lin-3.6.5.tar.gz
 
 ENTRYPOINT ["/tmp/builder/build.sh"]
 
