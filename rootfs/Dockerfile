@@ -19,6 +19,8 @@ ENV NODE_LIBXL_SDK_ARCHIVE /tmp/libxl-lin-3.6.5.tar.gz
 
 RUN chmod 755 /tmp/libxl-lin-3.6.5.tar.gz
 
+ENV NODE_TLS_REJECT_UNAUTHORIZED 0
+
 USER slug
 ENV HOME /app
 ADD ./builder/ /tmp/builder
