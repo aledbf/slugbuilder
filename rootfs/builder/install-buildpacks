@@ -29,7 +29,17 @@ download_buildpack() {
 mkdir -p $BUILDPACK_INSTALL_PATH
 
 download_buildpack https://github.com/heroku/heroku-buildpack-multi.git          v1.0.0
-download_buildpack https://github.com/heroku/heroku-buildpack-nodejs.git         v90
-download_buildpack https://github.com/heroku/heroku-buildpack-java.git           v44
-download_buildpack https://github.com/heroku/heroku-buildpack-python.git         v80
+download_buildpack https://github.com/aledbf/heroku-buildpack-nodejs.git         67729e96
 download_buildpack https://github.com/heroku/heroku-buildpack-go.git             v34
+
+echo "Downloading node.js"
+mkdir -p /tmp/node.js
+array=( 4.4.4 6.1.0 6.2.0 )
+for VERSION in "${array[@]}"
+do
+  echo $VERSION
+  curl "https://s3pository.heroku.com/node/v$VERSION/node-v$VERSION-linux-x64.tar.gz" -sSL -o /tmp/node.js/node-v$VERSION-linux-x64.tar.gz
+done
+
+echo "Configuring default version"
+ln -s /tmp/node.js/node-v6.2.0-linux-x64.tar.gz /tmp/node.js/latest-node-linux-x64.tar.gz
